@@ -1,2 +1,2 @@
 ---
-ansible_pull_ref: feature/ansible-pull
+ansible_pull_ref: next
