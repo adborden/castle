@@ -19,15 +19,28 @@
         state: present
       vars:
         packages:
-          - podman
+          - ansible
 
-    - name: Install castle-pull.container
+    - name: Remove container configuration
+      ansible.builtin.file:
+        path: /etc/containers/systemd/castle-pull.container
+        state: absent
+      notify:
+        - Reload systemd
+    - name: Install castle-pull.service
       ansible.builtin.template:
-        src: etc_containers_systemd_castle_pull.container.j2
-        dest: /etc/containers/systemd/castle-pull.container
+        src: etc_systemd_system_castle_pull.service.j2
+        dest: /etc/systemd/system/castle-pull.service
         mode: "0o644"
       notify:
         - Reload systemd
+    #- name: Install castle-pull.container
+    #  ansible.builtin.template:
+    #    src: etc_containers_systemd_castle_pull.container.j2
+    #    dest: /etc/containers/systemd/castle-pull.container
+    #    mode: "0o644"
+    #  notify:
+    #    - Reload systemd
 
     - name: Install castle-pull.timer
       ansible.builtin.template:

@@ -1,5 +1,5 @@
 ---
 ansible_pull_ref: main
 ansible_pull_args: ""
-ansible_pull_repository: https://githbu.com/adborden/castle.git
+ansible_pull_repository: https://github.com/adborden/castle.git
 ansible_pull_playbook: site.yaml

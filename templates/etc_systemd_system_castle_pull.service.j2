@@ -1,14 +1,9 @@
 [Unit]
 Description=Pull castle configuration
 
-[Container]
-Image=ghcr.io/adborden/castle:1.0.1-rc.5
-Volume=ansible-pull:/home/ansible:U
-Network=host
-Environment=ANSIBLE_PULL_ARGS={{ ansible_pull_args }}
+[Service]
 Environment=ANSIBLE_PULL_PLAYBOOK={{ ansible_pull_playbook }}
 Environment=ANSIBLE_PULL_REF={{ ansible_pull_ref }}
 Environment=ANSIBLE_PULL_REPOSITORY={{ ansible_pull_repository }}
-
-[Service]
+ExecStart=ansible-pull --url "${ANSIBLE_PULL_REPOSITORY}" --checkout "${ANSIBLE_PULL_REF}" "${ANSIBLE_PULL_PLAYBOOK}"
 Type=oneshot
