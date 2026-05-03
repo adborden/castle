@@ -1,0 +1,22 @@
+[project]
+name = "castle"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Aaron D Borden", email = "adborden@a14n.net" }]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["ansible (>=13.6.0,<14.0.0)"]
+
+[tool.poetry]
+package-mode = false
+
+[dependency-groups]
+dev = [
+  "molecule-plugins[podman] (>=25.8.12,<26.0.0)",
+  "pytest-testinfra (>=10.2.2,<11.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

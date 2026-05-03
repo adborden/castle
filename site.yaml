@@ -1,0 +1,6 @@
+---
+- name: Ansible pull
+  hosts: localhost
+  tasks:
+    - debug:
+        msg: ok
