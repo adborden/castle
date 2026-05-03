@@ -1,3 +1,10 @@
+## [1.0.1-rc.2](https://github.com/adborden/castle/compare/v1.0.1-rc.1...v1.0.1-rc.2) (2026-05-03)
+
+
+### Bug Fixes
+
+* sh instead of bash ([1359657](https://github.com/adborden/castle/commit/13596575c3cfc0cc0931fd9d337950e3acbafa9c))
+
 ## [1.0.1-rc.1](https://github.com/adborden/castle/compare/v1.0.0...v1.0.1-rc.1) (2026-05-03)
 
 
