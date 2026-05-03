@@ -26,3 +26,6 @@ ENV PATH=/app/.venv/bin:$PATH
 
 COPY docker/run.sh /usr/local/bin/
 CMD ["run.sh"]
+
+RUN useradd -m -s /bin/bash ansible
+USER ansible

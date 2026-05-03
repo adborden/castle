@@ -20,6 +20,24 @@ make deploy
 
 ## Development
 
+Install development dependencies.
+
+```bash
+make setup
+```
+
+Lint the playbooks.
+
+```bash
+make lint
+```
+
+Run the tests.
+
+```bash
+make test
+```
+
 ## Runbooks
 
 ## TODO
