@@ -1,3 +1,10 @@
+## [1.0.1-rc.5](https://github.com/adborden/castle/compare/v1.0.1-rc.4...v1.0.1-rc.5) (2026-05-03)
+
+
+### Bug Fixes
+
+* image ([36323c6](https://github.com/adborden/castle/commit/36323c6e4c29aec5ae06fae1a4b211136b269ee8))
+
 ## [1.0.1-rc.4](https://github.com/adborden/castle/compare/v1.0.1-rc.3...v1.0.1-rc.4) (2026-05-03)
 
 
