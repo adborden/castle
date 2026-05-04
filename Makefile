@@ -1,19 +1,18 @@
-.PHONY: build diff deploy setup
+.PHONY: diff deploy lint setup test
 
-CONTAINER_IMAGE ?= ghcr.io/adborden/castle
-CONTAINER_TAG ?= latest
-
-setup:
-	poetry install
+DEFAULT_GOAL: test
 
 diff:
 	ansible-playbook --diff --check site.yaml
 
 deploy:
-	ansible-playbook site.yaml
+	poetry run ansible-playbook site.yaml
 
-build:
-	docker build . --tag $(CONTAINER_IMAGE):$(CONTAINER_TAG) --load $(DOCKER_BUILD_ARGS)
+lint:
+	poetry run ansible-lint -v site.yaml
 
-publish: DOCKER_BUILD_ARGS = $(DOCKER_BUILD_ARGS) --push
-publish: build
+setup:
+	poetry install --with=dev
+
+test:
+	poetry run molecule test

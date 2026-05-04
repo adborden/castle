@@ -1,8 +1,12 @@
 # castle
 
-Ansible playbooks to manage all the nodes.
+Ansible playbooks to manage all the nodes. Configures nodes with
+ansible-pull so that nodes managed themselves and will converge on
+the desired state.
 
 ## Features
+
+- castle-pull systemd timer to keep nodes up to date
 
 ## Usage
 
@@ -19,6 +23,24 @@ make deploy
 ```
 
 ## Development
+
+Install development dependencies.
+
+```bash
+make setup
+```
+
+Lint the playbooks.
+
+```bash
+make lint
+```
+
+Run the tests.
+
+```bash
+make test
+```
 
 ## Runbooks
 
