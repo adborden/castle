@@ -5,5 +5,5 @@ Description=Pull castle configuration
 Environment=ANSIBLE_PULL_PLAYBOOK={{ ansible_pull_playbook }}
 Environment=ANSIBLE_PULL_REF={{ ansible_pull_ref }}
 Environment=ANSIBLE_PULL_REPOSITORY={{ ansible_pull_repository }}
-ExecStart=ansible-pull --url "${ANSIBLE_PULL_REPOSITORY}" --checkout "${ANSIBLE_PULL_REF}" "${ANSIBLE_PULL_PLAYBOOK}"
+ExecStart=ansible-pull --url "${ANSIBLE_PULL_REPOSITORY}" --checkout "${ANSIBLE_PULL_REF}" --verify-commit "${ANSIBLE_PULL_PLAYBOOK}"
 Type=oneshot
