@@ -1,0 +1,106 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install test certs dir
+      ansible.builtin.file:
+        path: /etc/vault
+        state: directory
+        mode: "0o755"
+
+    - name: Install test certificate
+      ansible.builtin.copy:
+        dest: /etc/vault/cert.pem
+        mode: "0o644"
+        content: |
+          -----BEGIN CERTIFICATE-----
+          MIIFnTCCA4WgAwIBAgIUYlJf00uhRjG2rKmf7R1hAz2NmcEwDQYJKoZIhvcNAQEL
+          BQAwXjELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNBMRYwFAYDVQQHDA1TYW4gRnJh
+          bmNpc2NvMQ0wCwYDVQQKDARhMTRuMQwwCgYDVQQLDANsYWIxDTALBgNVBAMMBHRl
+          c3QwHhcNMjYwNTA1MTYwODQxWhcNNDYwNDMwMTYwODQxWjBeMQswCQYDVQQGEwJV
+          UzELMAkGA1UECAwCQ0ExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoM
+          BGExNG4xDDAKBgNVBAsMA2xhYjENMAsGA1UEAwwEdGVzdDCCAiIwDQYJKoZIhvcN
+          AQEBBQADggIPADCCAgoCggIBAIhe8sp7JRl5hMvroQu/cWBiLhtpZq91JjWzetT8
+          AWDvKy7QuuQAr+cHwIi4Q0yhTC/zZX32s4VPR5ITx0HIoGB6VVpf1kooF1Dmf7l/
+          5aJBeDoQOTODl48IAUtYt55gUagDL7atoIF6Rhdav+AN4OJmzJQyDpU+u+ND0jEF
+          wMmNchZA2Nrwzj43jic6VWlpc4x3EAsZ8f7GDPRzLrVakT2GZ3R5lajxzBUocZC0
+          051Z47m4ud/hK86eKHOIBHeLDjEWoLIGmA7Qg6SJDFoygcx7LpTf/TdhOoyhrnAI
+          bXpRSiX/eGoKbSRQLHhDE2CXJIsLNi4wPwyx/s+A2wnfkIYt48ExeMvnNKqH0jVY
+          XkbMCGg75Z1J3iyr7T8hl4RTQ4PlD0WEeOy9Txg05R1RVDM6QxHvcynB27jelEJG
+          /YAfVVdJNGIx7aTY35I6iJFenIyqxUEWqcn4zjocAChOBiIov4JiieLL43pbOytZ
+          UF56XfPd6UMGNdfwgIzuebqxzYX1tpp1frxm26onXs9A1aEYdX6DJmLO2Iz5/FlB
+          C4S+7TqEhCwQF0hoB+LnH3jrZ1wxsLLcBE3DgaTdC49bnt7voevGyxkBEjG3C/Bc
+          shcuWRXRWmmeRtNUBKArMVY43X5xdmsT8g50hyuNYYGeC4dF1tSMqzRDSInZsUWc
+          iko3AgMBAAGjUzBRMB0GA1UdDgQWBBSZueZzwnK9lbBy08fmxXeuUtGW1TAfBgNV
+          HSMEGDAWgBSZueZzwnK9lbBy08fmxXeuUtGW1TAPBgNVHRMBAf8EBTADAQH/MA0G
+          CSqGSIb3DQEBCwUAA4ICAQBsNQ/NTul4QYmqe/fpBIDul51p5U+Wi5QjNllChiGM
+          eFG7JS9DtDzDZNFdJ/6FRicnaHqUTfEGcqvQzv+h5TRqrLrYQdujNXS2KPNuGgHu
+          NnouaWpltPasyxWpb2qnAieXoVsT9y2asKeRAlylnU6hyStUIJtMEb1BlaN+q52w
+          +j4DZLi0iVBDLzPyMrKZBzXyH5XhVLm1mZQTxdySeujZP8DXBgfq12iBgz+uvY8H
+          MKsUkQz8NpROy4U4l+3Bxin56PAgAi6aAI+XUUZ5jqxm63EdaHeUtuj1PGUrZRVZ
+          x7m2s51kjBMf2qidOt+N0EU4Oldm4W8ImrCEr/ImDWxOzOCF3NtmKNgdnNffWEex
+          scYQ5xA1w+o1SSOdfRB3GqjEcaB14KjSfrnAvajp77MZMQKG5LdIKT9umHjlXVQ2
+          jJwwgNZfJ9RBf2koiKrfyoApun5X/qdD75BFtIga0e8/oe4GEN0aGP2ouK2dC4AX
+          sMsyRBC/ZdE0f1VDBV/OK51bjDhlo8pD6FH1IYQfOWkZ3Od1wBQWAcNKyAqUSuDQ
+          oqJvqQlxp+KFZzi6wq3ov0MlaOWK3+jfSX9CGP1ITVcDa0FUjDfsFVmufuasZhB9
+          9PiQgp/+7MnloDxo2vbqhubkhBOMa9ih2O44EnkeXU5R7F31KBpIfLeWPyxOb/YF
+          fA==
+          -----END CERTIFICATE-----
+
+    - name: Install test private key
+      ansible.builtin.copy:
+        dest: /etc/vault/key.pem
+        mode: "0o644" # Allow insecure for testing
+        content: |
+          -----BEGIN PRIVATE KEY-----
+          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
+          y0Oi9aHPfP3138UNDAjG6XpT8DQ=
+          -----END PRIVATE KEY-----

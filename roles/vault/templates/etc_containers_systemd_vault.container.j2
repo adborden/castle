@@ -1,0 +1,26 @@
+[Unit]
+Description=Vault secret storage
+Wants=network.target
+After=network.target
+
+[Container]
+AddCapability=IPC_LOCK
+AddCapability=SETFCAP
+Image={{ vault_image }}
+{% if vault_podman_args %}
+PodmanArgs={{ vault_podman_args }}
+{% endif %}
+Volume={{ vault_config_dir }}:/etc/vault:ro
+Volume={{ vault_data_dir }}:/var/lib/vault:Z
+User={{ ansible_facts.getent_passwd["vault"][1] }}
+Group={{ vault_group.gid }}
+{% for port in vault_publish_ports %}
+PublishPort={{ port }}
+{% endfor %}
+Exec=server -config=/etc/vault/config.hcl
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
