@@ -1,0 +1,5 @@
+---
+castle_pull_ref: main
+castle_pull_repository: https://github.com/adborden/castle.git
+castle_pull_playbook: site.yaml
+castle_pull_pgp_key_id: 00A43CCE8F0071D2FBA9873DAEE2B24D59FD94F6

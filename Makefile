@@ -16,5 +16,5 @@ setup:
 	poetry run ansible-galaxy install -r requirements.yaml --force
 
 test:
-	poetry run molecule test
+	cd roles/castle_pull && poetry run molecule test
 	cd roles/vault && poetry run molecule test

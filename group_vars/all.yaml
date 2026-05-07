@@ -1,9 +1,4 @@
 ---
-ansible_pull_ref: main
-ansible_pull_repository: https://github.com/adborden/castle.git
-ansible_pull_playbook: site.yaml
-ansible_pull_pgp_key_id: 00A43CCE8F0071D2FBA9873DAEE2B24D59FD94F6
-
 smallstep_cli_ca_url: https://matchbox.lab.internal:9000
 smallstep_cli_ca_fingerprint: d7abde5e0b28364a608d5a2a9d06189702bf1d73624f44325a36db5bc1a4487e
 
