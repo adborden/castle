@@ -1,0 +1,11 @@
+---
+smallstep_cli_ca_url: https://matchbox.lab.internal:9000
+smallstep_cli_ca_fingerprint: d7abde5e0b28364a608d5a2a9d06189702bf1d73624f44325a36db5bc1a4487e
+
+vault_listener_tls_cert_file: /etc/smallstep/cert.pem
+vault_listener_tls_key_file: /etc/smallstep/key.pem
+
+vault_container_additional_volumes:
+  - /etc/smallstep:/etc/smallstep:ro
+vault_supplemental_groups:
+  - smallstep
