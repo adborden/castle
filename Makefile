@@ -9,7 +9,7 @@ deploy:
 	poetry run ansible-playbook site.yaml
 
 lint:
-	poetry run ansible-lint
+	poetry run ansible-lint site.yaml
 
 setup:
 	poetry install --with=dev

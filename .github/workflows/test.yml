@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: poetry install --with=dev
 
+      - name: Install ansible roles
+        run: poetry run ansible-galaxy install -r requirements.yaml --force
+
       - name: Run ansible-lint
         run: poetry run ansible-lint
 
