@@ -70,6 +70,7 @@ def test_vault_config(host):
 
 
 def test_vault_response(host):
+    hostname = host.ansible.get_variables()["inventory_hostname"]
     noverify = ssl._create_unverified_context()
-    r = urllib.request.urlopen("https://localhost:8200/ui/", context=noverify)
+    r = urllib.request.urlopen(f"https://{hostname}:8200/ui/", context=noverify)
     assert r.status == 200
