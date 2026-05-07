@@ -1,0 +1,5 @@
+---
+collections:
+  - name: https://github.com/adborden/ansible-smallstep-ca.git
+    version: bugfix/ansible-pull
+    type: git

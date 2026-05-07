@@ -27,5 +27,7 @@ provisioner:
         is_molecule: true
         # Fix podman in podman issue: Error: netavark: setns: IO error: Operation not permitted (os error 1)
         vault_podman_args: --network=host
+        vault_supplemental_groups:
+          - supplemental
 verifier:
   name: testinfra

@@ -13,6 +13,7 @@ lint:
 
 setup:
 	poetry install --with=dev
+	poetry run ansible-galaxy install -r requirements.yaml --force
 
 test:
 	poetry run molecule test

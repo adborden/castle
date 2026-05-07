@@ -13,4 +13,5 @@ vault_listener_tls_key_file: /etc/vault/key.pem
 vault_listener_tls_min_version: tls13
 vault_ui: true
 
+vault_container_additional_volumes: []
 vault_supplemental_groups: []

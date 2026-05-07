@@ -1,8 +1,15 @@
 ---
-- name: Castle pull
-  ansible.builtin.import_playbook: castle_pull.yaml
+- name: Smallstep certificates
+  hosts: all
+  become: true
+  roles:
+    - role: adborden.smallstep.smallstep_cli
 
 - name: Vault
   hosts: vault
+  become: true
   roles:
     - role: vault
+
+- name: Castle pull
+  ansible.builtin.import_playbook: castle_pull.yaml

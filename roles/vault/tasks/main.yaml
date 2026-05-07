@@ -23,6 +23,13 @@
     system: true
     state: present
 
+- name: Lookup supplemental group gids
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ vault_supplemental_groups }}"
+  register: vault_supplemental_gids
+
 - name: Lookup vault uid
   ansible.builtin.getent:
     database: passwd
@@ -49,6 +56,8 @@
     src: etc_vault_config.hcl.j2
     dest: /etc/vault/config.hcl
     mode: "0o644"
+  notify:
+    - Restart vault
 
 - name: Configure vault.container
   ansible.builtin.template:
@@ -57,6 +66,7 @@
     mode: "0o644"
   notify:
     - Reload systemd
+    - Restart vault
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers

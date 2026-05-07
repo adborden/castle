@@ -2,6 +2,12 @@
 - name: Prepare
   hosts: all
   tasks:
+    - name: Create supplemental group
+      ansible.builtin.group:
+        name: supplemental
+        system: true
+        state: present
+
     - name: Install test certs dir
       ansible.builtin.file:
         path: /etc/vault
