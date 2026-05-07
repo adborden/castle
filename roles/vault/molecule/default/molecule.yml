@@ -13,9 +13,15 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns: host
     network: host
-    tmpfs:
-      /run: "rw"
-      /tmp: "rw"
+  - name: ubuntu-resolute
+    image: ubuntu:26.04
+    dockerfile: Dockerfile.j2
+    privileged: true
+    command: /lib/systemd/systemd
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns: host
+    network: host
 provisioner:
   name: ansible
   config_options:
