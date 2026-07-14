@@ -1,0 +1,14 @@
+ui = {{ vault_ui | to_json }}
+
+storage "file" {
+  path = "/var/lib/vault/data"
+}
+
+listener "tcp" {
+  address         = "{{ vault_listener_address }}"
+  tls_cert_file   = "{{ vault_listener_tls_cert_file }}"
+  tls_key_file    = "{{ vault_listener_tls_key_file }}"
+  tls_min_version = "{{ vault_listener_tls_min_version }}"
+}
+
+disable_mlock = {{ vault_disable_mlock | to_json }}

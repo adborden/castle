@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: adborden
+  role_name: castle_pull
+  namespace: adborden
+  description: ansible-pull service
+  license: AGPL-3.0
+  min_ansible_version: "2.2"
