@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: "3.14"
 
-      - uses: Gr1N/setup-poetry@v8
+      - uses: Gr1N/setup-poetry@v9
 
       - name: Semantic Release
         id: semantic
