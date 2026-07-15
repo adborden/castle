@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/adborden/castle/compare/v1.0.0...v1.0.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ansible to >=14.2.0,<14.3.0 ([ada167b](https://github.com/adborden/castle/commit/ada167b6e4c61c3676dec78b61136ebcd1a7de09))
+
 # 1.0.0 (2026-07-14)
 
 
