@@ -1,0 +1,5 @@
+---
+collections:
+  - name: https://github.com/adborden/ansible-smallstep-ca.git
+    version: v1.0.0
+    type: git

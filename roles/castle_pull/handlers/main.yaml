@@ -1,0 +1,9 @@
+---
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart castle-pull.timer
+  ansible.builtin.systemd:
+    service: castle-pull.timer
+    state: restarted

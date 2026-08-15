@@ -1,0 +1,47 @@
+---
+- name: Install package dependencies
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - ansible
+      - gnupg
+
+# TODO: check for expiration, refresh the key if necessary
+- name: Check for pgp signing key
+  ansible.builtin.command: gpg --list-keys {{ castle_pull_pgp_key_id }}
+  ignore_errors: true
+  register: castle_pull_pgp_key_exists
+  changed_when: false
+
+- name: Import gnupg keys
+  ansible.builtin.command: gpg --recv-keys {{ castle_pull_pgp_key_id }}
+  when: castle_pull_pgp_key_exists is not success
+  changed_when: true
+
+- name: Install castle-pull.service
+  ansible.builtin.template:
+    src: etc_systemd_system_castle_pull.service.j2
+    dest: /etc/systemd/system/castle-pull.service
+    mode: "0o644"
+  notify:
+    - Reload systemd
+
+- name: Install castle-pull.timer
+  ansible.builtin.template:
+    src: etc_systemd_system_castle_pull.timer.j2
+    dest: /etc/systemd/system/castle-pull.timer
+    mode: "0o644"
+  notify:
+    - Reload systemd
+    - Restart castle-pull.timer
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable castle-pull.timer
+  ansible.builtin.systemd:
+    service: castle-pull.timer
+    state: started
+    enabled: true

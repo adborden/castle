@@ -1,0 +1,78 @@
+---
+- name: Install package dependencies
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - podman
+
+- name: Create vault group
+  ansible.builtin.group:
+    name: vault
+    system: true
+    state: present
+  register: vault_group
+
+- name: Create vault user
+  ansible.builtin.user:
+    name: vault
+    group: vault
+    groups: "{{ vault_supplemental_groups }}"
+    create_home: false
+    system: true
+    state: present
+
+- name: Lookup supplemental group gids
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ vault_supplemental_groups }}"
+  register: vault_supplemental_gids
+
+- name: Lookup vault uid
+  ansible.builtin.getent:
+    database: passwd
+    key: vault
+
+- name: Configure vault configuration directory
+  ansible.builtin.file:
+    mode: "0o755"
+    path: "{{ vault_config_dir }}"
+    owner: vault
+    group: vault
+    state: directory
+
+- name: Configure vault data directory
+  ansible.builtin.file:
+    mode: "0o755"
+    path: "{{ vault_data_dir }}"
+    owner: vault
+    group: vault
+    state: directory
+
+- name: Configure vault settings
+  ansible.builtin.template:
+    src: etc_vault_config.hcl.j2
+    dest: /etc/vault/config.hcl
+    mode: "0o644"
+  notify:
+    - Restart vault
+
+- name: Configure vault.container
+  ansible.builtin.template:
+    src: etc_containers_systemd_vault.container.j2
+    dest: /etc/containers/systemd/vault.container
+    mode: "0o644"
+  notify:
+    - Reload systemd
+    - Restart vault
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Start vault.container
+  ansible.builtin.systemd:
+    name: vault
+    state: started
+    enabled: true

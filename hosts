@@ -1,7 +1,6 @@
 [nodes]
 matchbox.lab.internal ansible_ssh_user=ubuntu
 home-assistant.lan.internal ansible_ssh_user=ubuntu
-test
 
 
 [ca]
@@ -9,3 +8,6 @@ matchbox.lab.internal
 
 [development]
 home-assistant.lan.internal
+
+[vault]
+matchbox.lab.internal
