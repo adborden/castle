@@ -1,0 +1,8 @@
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.8.2/24
+Gateway=192.168.8.1
+DNS=192.168.8.1
+Domains=lab.internal

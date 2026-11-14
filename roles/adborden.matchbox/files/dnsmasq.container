@@ -1,0 +1,17 @@
+[Unit]
+Description=dnsmasq for pxeboot
+
+[Container]
+AddCapability=NET_ADMIN
+AddCapability=NET_RAW
+Exec=--no-daemon 
+Image=quay.io/poseidon/dnsmasq:v0.5.0
+Network=host
+Volume=/etc/dnsmasq.conf:/etc/dnsmasq.conf
+Volume=/var/lib/misc:/var/lib/misc
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

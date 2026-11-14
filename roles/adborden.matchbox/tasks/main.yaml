@@ -1,0 +1,41 @@
+---
+- name: Install package dependencies
+  apt:
+    name: "{{ item }}"
+    update_cache: true
+    cache_valid_time: "{{ 24 * 3600 }}"
+    state: present
+  vars:
+    packages:
+      - podman
+  with_items: "{{ packages }}"
+
+- name: Copy dnsmasq config
+  copy:
+    src: dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    mode: "0o644"
+    owner: root
+    group: root
+  notify:
+    - Restart dnsmasq
+
+- name: Copy dnsmasq container image
+  copy:
+    src: dnsmasq.image
+    dest: /etc/containers/systemd/dnsmasq.image
+    mode: "0o644"
+    owner: root
+    group: root
+  notify:
+    - Reload systemd
+
+- name: Copy dnsmasq container service
+  copy:
+    src: dnsmasq.container
+    dest: /etc/containers/systemd/dnsmasq.container
+    mode: "0o644"
+    owner: root
+    group: root
+  notify:
+    - Reload systemd

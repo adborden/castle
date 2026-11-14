@@ -1,0 +1,24 @@
+#cloud-config
+hostname: matchbox
+
+# Update apt database and upgrade packages on first boot
+package_update: true
+package_upgrade: true
+power_state:
+  mode: reboot
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgepEgS+Z+UuG2tSQzgn546V4M6mJtk+AfD3pgvRsj6rzAw4tyhSPGeJsXdlNkNi54cJiRzOZNuVXKn2ojc1y+cD88vfSnnEc+/DkfW0cDYowSgzIxfOaYzX5qj0FXh91eaFmg6+yx2AsHXXtWaesqM/4WpQq8d0VEMqhrelIjgBsLQONMoaj7adFARuhlMMbjqvW5aKZeuB8CGW5VprebwUPzRfEhvimO/IZ9+Z08qtxTXtWiUX9G/OeZ4+ddBkkO0XHFwCbVDa4AM/I6jo18hKz5EE9q4ZS7XOKVHElqbK/fg4bHBJqS5VM8QPMBEi+uGFjksSHxhWDWoMw62YC5 adborden@cano
+  - pty,cert-authority,principals="core" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKu8e9qJYa15kj3C6p3GfEz0q29fPbN4fn81b4lcbqg8TGx9H1X4nICVK7WlA0StUfIigvSF3T1gnQBjxvs/XZ7XUu5iI1PWl4FhrUi0Ch9/siCHAA15Y7lL0bxsVYRwPruDbxb8YjA+J6lcNu3cRY95OGACZkIeI4l9ml4RZf5sgIKuByQGHfV6O7BzwcI93ip+1C9Ifa5dF+OwSwb432opw6ZTQvsQRbBTk+8cTVbM2XMiuDs3ypp/wzL3MK/W15+KQDvrvj7cBpt+tjMbLZwpZazDg7SGoyE+YaQYhO+RaQCsp48S7ZsPylV9sGw0SuRe2DJq8+PAyMDGjR68QPKj50EGDuSoAkJkjrk+F/jyEamSwBApDPnFUpRT/GBwTyb1TkHWthqoCeck+oOd29i4UwCgjGoiHFkisdUvZPPBHgOdoo69WrjYwpgOlfvLpJLaMRrchnWBmKKjdVpF9VsN2RqaYs1lyxBNwZ9fLfN5k/vNrHsU0z9U91a7aroBabpGKTd2yQiptcFrkLV36x6MSC8o8FX43IaQKPdAugwccNGxGSZGXC84rNmVrobMmLhxzI6bbFMyM1jbfly12zbXsy/cR8++Jcv2GScBo2JBYyMmQh+MEV8AuPmjjJh/HOjwntSw3g8U10y3TTsUS6CLbWOYslIdEnqsB4nQKEBw== host
+
+timezone: America/Los_Angeles
+
+write_files:
+  # automatic reboot
+  - path: /etc/apt/apt.conf.d/90local
+    content: |
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+    owner: root:root
+    permissions: "0644"
+    defer: true
