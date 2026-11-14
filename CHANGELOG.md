@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/adborden/castle/compare/v1.0.2...v1.1.0) (2026-11-14)
+
+
+### Features
+
+* **matchbox:** matchbox role ([aea1749](https://github.com/adborden/castle/commit/aea174967f5d37b1af0b289065ff6f7c7a98b3b1))
+
 ## [1.0.2](https://github.com/adborden/castle/compare/v1.0.1...v1.0.2) (2026-11-14)
 
 
