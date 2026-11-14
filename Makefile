@@ -16,3 +16,4 @@ setup:
 
 test:
 	poetry run molecule test
+	cd roles/adborden.matchbox && poetry run molecule test

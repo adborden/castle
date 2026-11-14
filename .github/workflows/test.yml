@@ -34,3 +34,10 @@ jobs:
         env:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
+
+      - name: Run molecule test
+        run: poetry run molecule test
+        working-directory: roles/adborden.matchbox
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
