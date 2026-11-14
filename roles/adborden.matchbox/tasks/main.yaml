@@ -1,6 +1,6 @@
 ---
 - name: Install package dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     update_cache: true
     cache_valid_time: "{{ 24 * 3600 }}"
@@ -11,7 +11,7 @@
   with_items: "{{ packages }}"
 
 - name: Copy dnsmasq config
-  copy:
+  ansible.builtin.copy:
     src: dnsmasq.conf
     dest: /etc/dnsmasq.conf
     mode: "0o644"
@@ -21,7 +21,7 @@
     - Restart dnsmasq
 
 - name: Copy dnsmasq container image
-  copy:
+  ansible.builtin.copy:
     src: dnsmasq.image
     dest: /etc/containers/systemd/dnsmasq.image
     mode: "0o644"
@@ -31,7 +31,7 @@
     - Reload systemd
 
 - name: Copy dnsmasq container service
-  copy:
+  ansible.builtin.copy:
     src: dnsmasq.container
     dest: /etc/containers/systemd/dnsmasq.container
     mode: "0o644"
